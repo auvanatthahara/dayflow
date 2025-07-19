@@ -1,9 +1,13 @@
 package com.atthahara.dayflow.model;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.UUID;
 
+import com.atthahara.dayflow.constant.TaskType;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotNull;
@@ -18,26 +22,26 @@ public class Task {
     private UUID id;
 
     @NotNull
-    private String type;
+    @Enumerated(EnumType.STRING)
+    private TaskType type;
 
     @NotNull
     private String name;
 
     @NotNull
-    private LocalDateTime createdDate;
+    private LocalDate createdDate;
 
-    private LocalDateTime dueDate;
+    private LocalDate dueDate;
 
-    private LocalDateTime startDate;
+    private LocalDate startDate;
 
-    private LocalDateTime completedDate;
+    private LocalDate completedDate;
 
     private String description;
 
     @NotNull
     private String status;
 
-    @NotNull
     private Boolean isActive;
 
 }

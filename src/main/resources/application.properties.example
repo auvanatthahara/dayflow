@@ -1,6 +1,6 @@
 spring.application.name=dayflow
 # PostgreSQL DB config
-spring.datasource.url=jdbc:postgresql:<your_database>
+spring.datasource.url=jdbc:postgresql://<your_database>
 spring.datasource.username=<user_name>
 spring.datasource.password=<user_pass>
 spring.datasource.driver-class-name=org.postgresql.Driver

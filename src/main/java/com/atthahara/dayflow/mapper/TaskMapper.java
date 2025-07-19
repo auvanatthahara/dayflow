@@ -4,12 +4,12 @@ import java.time.LocalDateTime;
 
 import com.atthahara.dayflow.dto.TaskRequestDTO;
 import com.atthahara.dayflow.dto.TaskResponseDTO;
-import com.atthahara.dayflow.model.TaskModel;
+import com.atthahara.dayflow.model.Task;
 
 public class TaskMapper {
 
-    public static TaskModel toEntity(TaskRequestDTO dto) {
-        TaskModel task = new TaskModel();
+    public static Task toEntity(TaskRequestDTO dto) {
+        Task task = new Task();
         task.setType(dto.getType());
         task.setName(dto.getName());
         task.setCreatedDate(LocalDateTime.now());
@@ -23,7 +23,7 @@ public class TaskMapper {
         return task;
     }
 
-    public static TaskResponseDTO toResponse(TaskModel task) {
+    public static TaskResponseDTO toResponse(Task task) {
         TaskResponseDTO dto = new TaskResponseDTO();
         dto.setId(task.getId());
         dto.setType(task.getType());

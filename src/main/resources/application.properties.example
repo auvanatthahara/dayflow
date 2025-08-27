@@ -1,9 +1,10 @@
 spring.application.name=dayflow
 # PostgreSQL DB config
-spring.datasource.url=jdbc:postgresql:<your_database>
-spring.datasource.username=<user_name>
-spring.datasource.password=<user_pass>
-spring.datasource.driver-class-name=org.postgresql.Driver
+spring.datasource.url=jdbc:postgresql://localhost:5432/dayflow
+spring.datasource.username=postgres
+spring.datasource.password=admin
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
 
 # JPA / Hibernate
 spring.jpa.hibernate.ddl-auto=update

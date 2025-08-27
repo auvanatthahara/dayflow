@@ -1,5 +1,6 @@
 spring.application.name=dayflow
 # PostgreSQL DB config
+<<<<<<< HEAD
 spring.datasource.url=jdbc:postgresql://localhost:5432/dayflow
 spring.datasource.username=postgres
 spring.datasource.password=admin

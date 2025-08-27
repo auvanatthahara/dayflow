@@ -1,18 +1,19 @@
 package com.atthahara.dayflow.mapper;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
+import com.atthahara.dayflow.constant.TaskType;
 import com.atthahara.dayflow.dto.TaskRequestDTO;
 import com.atthahara.dayflow.dto.TaskResponseDTO;
-import com.atthahara.dayflow.model.TaskModel;
+import com.atthahara.dayflow.model.Task;
 
 public class TaskMapper {
 
-    public static TaskModel toEntity(TaskRequestDTO dto) {
-        TaskModel task = new TaskModel();
-        task.setType(dto.getType());
+    public static Task toEntity(TaskRequestDTO dto) {
+        Task task = new Task();
+        task.setType(TaskType.fromLabel(dto.getType()));
         task.setName(dto.getName());
-        task.setCreatedDate(LocalDateTime.now());
+        task.setCreatedDate(LocalDate.now());
         task.setDueDate(dto.getDueDate());
         task.setStartDate(dto.getStartDate());
         task.setCompletedDate(dto.getCompletedDate());
@@ -23,10 +24,10 @@ public class TaskMapper {
         return task;
     }
 
-    public static TaskResponseDTO toResponse(TaskModel task) {
+    public static TaskResponseDTO toResponse(Task task) {
         TaskResponseDTO dto = new TaskResponseDTO();
         dto.setId(task.getId());
-        dto.setType(task.getType());
+        dto.setType(task.getType().getLabel());
         dto.setName(task.getName());
         dto.setCreatedDate(task.getCreatedDate());
         dto.setDueDate(task.getDueDate());

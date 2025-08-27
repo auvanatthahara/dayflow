@@ -1,6 +1,6 @@
 package com.atthahara.dayflow.dto;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.UUID;
 
 import lombok.Data;
@@ -12,10 +12,10 @@ public class TaskResponseDTO {
     private String type;
     private String name;
 
-    private LocalDateTime createdDate;
-    private LocalDateTime dueDate;
-    private LocalDateTime startDate;
-    private LocalDateTime completedDate;
+    private LocalDate createdDate;
+    private LocalDate dueDate;
+    private LocalDate startDate;
+    private LocalDate completedDate;
 
     private String description;
     private String status;

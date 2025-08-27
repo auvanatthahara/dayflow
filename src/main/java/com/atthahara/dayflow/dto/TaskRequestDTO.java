@@ -1,6 +1,6 @@
 package com.atthahara.dayflow.dto;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -14,9 +14,9 @@ public class TaskRequestDTO {
     @NotNull
     private String name;
 
-    private LocalDateTime dueDate;
-    private LocalDateTime startDate;
-    private LocalDateTime completedDate;
+    private LocalDate dueDate;
+    private LocalDate startDate;
+    private LocalDate completedDate;
 
     private String description;
 

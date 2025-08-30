@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import com.atthahara.dayflow.constant.TaskType;
 
+>>>>>>> origin/master:src/main/java/com/atthahara/dayflow/model/Task.java
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -12,13 +13,21 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import org.hibernate.annotations.GenericGenerator; // <-- penting, dari Hibernate
+
+import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Entity
 @Data
 public class Task {
 
     @Id
-    @GeneratedValue(strategy = jakarta.persistence.GenerationType.AUTO)
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(
+        name = "UUID",
+        strategy = "org.hibernate.id.UUIDGenerator"
+    )
     private UUID id;
 
     @NotNull
@@ -43,5 +52,4 @@ public class Task {
     private String status;
 
     private Boolean isActive;
-
 }

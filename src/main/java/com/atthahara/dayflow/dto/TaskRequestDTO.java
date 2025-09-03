@@ -1,27 +1,24 @@
 package com.atthahara.dayflow.dto;
 
-import java.time.LocalDate;
+import com.atthahara.dayflow.constant.TaskType;
+import java.time.LocalDateTime;
 
-import jakarta.validation.constraints.NotNull;
-import lombok.Data;
-
-@Data
 public class TaskRequestDTO {
-
-    @NotNull
-    private String type;
-
-    @NotNull
     private String name;
+    private TaskType type;
+    private LocalDateTime startDate;
+    private LocalDateTime endDate;
 
-    private LocalDate dueDate;
-    private LocalDate startDate;
-    private LocalDate completedDate;
+    // Getter & Setter
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
 
-    private String description;
+    public TaskType getType() { return type; }
+    public void setType(TaskType type) { this.type = type; }
 
-    @NotNull
-    private String status;
+    public LocalDateTime getStartDate() { return startDate; }
+    public void setStartDate(LocalDateTime startDate) { this.startDate = startDate; }
 
-    private Boolean isActive;
+    public LocalDateTime getEndDate() { return endDate; }
+    public void setEndDate(LocalDateTime endDate) { this.endDate = endDate; }
 }

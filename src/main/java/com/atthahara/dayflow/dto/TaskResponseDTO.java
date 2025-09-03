@@ -1,23 +1,23 @@
 package com.atthahara.dayflow.dto;
 
-import java.time.LocalDate;
-import java.util.UUID;
-
+import com.atthahara.dayflow.constant.TaskType;
+import lombok.Builder;
 import lombok.Data;
 
+import java.time.LocalDateTime;
+import java.util.UUID;
+
 @Data
+@Builder
 public class TaskResponseDTO {
 
     private UUID id;
-    private String type;
+    private TaskType type;
     private String name;
-
-    private LocalDate createdDate;
-    private LocalDate dueDate;
-    private LocalDate startDate;
-    private LocalDate completedDate;
-
     private String description;
     private String status;
-    private Boolean isActive;
+    private LocalDateTime createdDate;
+    private LocalDateTime startDate;
+    private LocalDateTime dueDate;
+    private LocalDateTime completedDate;
 }

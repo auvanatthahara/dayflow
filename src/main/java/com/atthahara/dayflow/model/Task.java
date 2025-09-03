@@ -1,47 +1,43 @@
 package com.atthahara.dayflow.model;
 
-import java.time.LocalDate;
+import com.atthahara.dayflow.constant.TaskType;
+import jakarta.persistence.*;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
-import com.atthahara.dayflow.constant.TaskType;
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.validation.constraints.NotNull;
-import lombok.Data;
-
 @Entity
-@Data
+@Table(name = "tasks")
 public class Task {
 
     @Id
-    @GeneratedValue(strategy = jakarta.persistence.GenerationType.AUTO)
+    @GeneratedValue
     private UUID id;
 
-    @NotNull
+    private String name;
+
     @Enumerated(EnumType.STRING)
     private TaskType type;
 
-    @NotNull
-    private String name;
+    private LocalDateTime startDate;
+    private LocalDateTime endDate;
+    private LocalDateTime createdDate;
 
-    @NotNull
-    private LocalDate createdDate;
+    // Getter & Setter
+    public UUID getId() { return id; }
+    public void setId(UUID id) { this.id = id; }
 
-    private LocalDate dueDate;
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
 
-    private LocalDate startDate;
+    public TaskType getType() { return type; }
+    public void setType(TaskType type) { this.type = type; }
 
-    private LocalDate completedDate;
+    public LocalDateTime getStartDate() { return startDate; }
+    public void setStartDate(LocalDateTime startDate) { this.startDate = startDate; }
 
-    private String description;
+    public LocalDateTime getEndDate() { return endDate; }
+    public void setEndDate(LocalDateTime endDate) { this.endDate = endDate; }
 
-    @NotNull
-    private String status;
-
-    private Boolean isActive;
-
+    public LocalDateTime getCreatedDate() { return createdDate; }
+    public void setCreatedDate(LocalDateTime createdDate) { this.createdDate = createdDate; }
 }

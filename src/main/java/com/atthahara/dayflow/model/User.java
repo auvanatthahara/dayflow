@@ -3,6 +3,7 @@ package com.atthahara.dayflow.model;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
 import java.util.UUID;
 
 @Entity
@@ -10,6 +11,7 @@ import java.util.UUID;
 @Getter
 @Setter
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
@@ -20,5 +22,6 @@ public class User {
     @Column(nullable = false)
     private String password;
 
+    @Column(unique = true, nullable = false)
     private String email;
 }

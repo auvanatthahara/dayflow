@@ -1,13 +1,14 @@
 package com.atthahara.dayflow.repository;
 
-import java.util.UUID;
-
+import com.atthahara.dayflow.constant.TaskType;
+import com.atthahara.dayflow.model.Task;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.atthahara.dayflow.model.Task;
+import java.util.List;
+import java.util.UUID;
 
 @Repository
 public interface TaskRepository extends JpaRepository<Task, UUID> {
-
+    List<Task> findByType(TaskType type);
 }

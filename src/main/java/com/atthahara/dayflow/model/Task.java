@@ -1,46 +1,43 @@
 package com.atthahara.dayflow.model;
 
-import java.time.LocalDate;
-import java.util.UUID;
 import com.atthahara.dayflow.constant.TaskType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.validation.constraints.NotNull;
-import lombok.Data;
-import org.hibernate.annotations.GenericGenerator;
+import jakarta.persistence.*;
+import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Entity
-@Data
+@Table(name = "tasks")
 public class Task {
 
     @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(
-        name = "UUID",
-        strategy = "org.hibernate.id.UUIDGenerator"
-    )
+    @GeneratedValue
     private UUID id;
 
-    @NotNull
+    private String name;
+
     @Enumerated(EnumType.STRING)
     private TaskType type;
 
-    @NotNull
-    private String name;
+    private LocalDateTime startDate;
+    private LocalDateTime endDate;
+    private LocalDateTime createdDate;
 
-    @NotNull
-    private LocalDate createdDate;
+    // Getter & Setter
+    public UUID getId() { return id; }
+    public void setId(UUID id) { this.id = id; }
 
-    private LocalDate dueDate;
-    private LocalDate startDate;
-    private LocalDate completedDate;
-    private String description;
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
 
-    @NotNull
-    private String status;
+    public TaskType getType() { return type; }
+    public void setType(TaskType type) { this.type = type; }
 
-    private Boolean isActive;
+    public LocalDateTime getStartDate() { return startDate; }
+    public void setStartDate(LocalDateTime startDate) { this.startDate = startDate; }
+
+    public LocalDateTime getEndDate() { return endDate; }
+    public void setEndDate(LocalDateTime endDate) { this.endDate = endDate; }
+
+    public LocalDateTime getCreatedDate() { return createdDate; }
+    public void setCreatedDate(LocalDateTime createdDate) { this.createdDate = createdDate; }
 }

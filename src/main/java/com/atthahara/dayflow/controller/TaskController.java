@@ -1,37 +1,68 @@
 package com.atthahara.dayflow.controller;
 
+import com.atthahara.dayflow.dto.TaskRequestDTO;
+import com.atthahara.dayflow.model.Task;
+import com.atthahara.dayflow.constant.TaskType;
+import com.atthahara.dayflow.service.TaskService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.atthahara.dayflow.dto.TaskRequestDTO;
-import com.atthahara.dayflow.dto.TaskResponseDTO;
-import com.atthahara.dayflow.service.TaskService;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
-import jakarta.validation.Valid;
-
-@RestController   // <- pakai RestController biar default return JSON
-@RequestMapping("/tasks")
+@RestController
+@RequestMapping("/api/tasks")
 public class TaskController {
 
     private final TaskService taskService;
 
-    // Dependency Injection lewat constructor
     public TaskController(TaskService taskService) {
         this.taskService = taskService;
     }
 
-    // Create Task
+    /** CREATE */
     @PostMapping
-    public ResponseEntity<TaskResponseDTO> createTask(@RequestBody @Valid TaskRequestDTO taskRequest) {
-        TaskResponseDTO response = taskService.createTask(taskRequest);
-        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    public ResponseEntity<Task> createTask(@RequestBody TaskRequestDTO dto) {
+        Task task = taskService.createTask(dto);
+        return new ResponseEntity<>(task, HttpStatus.CREATED);
     }
 
-    // Get Task by ID (contoh pakai RequestParam, bukan di path)
+    /** READ - all */
     @GetMapping
-    public ResponseEntity<TaskResponseDTO> getTaskById(@RequestParam("id") String id) {
-        TaskResponseDTO response = taskService.getTaskById(id);
-        return ResponseEntity.ok(response); // 200 OK
+    public ResponseEntity<List<Task>> getAllTasks() {
+        List<Task> tasks = taskService.getAllTasks();
+        return ResponseEntity.ok(tasks);
+    }
+
+    /** READ - by id */
+    @GetMapping("/{id}")
+    public ResponseEntity<Task> getTaskById(@PathVariable UUID id) {
+        Optional<Task> taskOpt = taskService.getTaskById(id);
+        return taskOpt.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    /** UPDATE */
+    @PutMapping("/{id}")
+    public ResponseEntity<Task> updateTask(@PathVariable UUID id, @RequestBody TaskRequestDTO dto) {
+        Optional<Task> updatedTask = taskService.updateTask(id, dto);
+        return updatedTask.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    /** DELETE */
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteTask(@PathVariable UUID id) {
+        boolean deleted = taskService.deleteTask(id);
+        return deleted ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
+    }
+
+    /** FILTER by type */
+    @GetMapping("/type/{type}")
+    public ResponseEntity<List<Task>> getTasksByType(@PathVariable TaskType type) {
+        List<Task> tasks = taskService.getTasksByType(type);
+        return ResponseEntity.ok(tasks);
     }
 }
